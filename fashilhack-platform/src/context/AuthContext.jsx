@@ -1,4 +1,3 @@
-import React from 'react'
 import { createContext, useContext, useEffect, useState } from "react"
 import {
   onAuthStateChanged,
@@ -15,23 +14,19 @@ import {
 } from "firebase/firestore"
 import { auth, db, provider } from "../config/firebase"
 
-// ── Create context ──
 const AuthContext = createContext(null)
 export const useAuth = () => useContext(AuthContext)
 
-// ── Provider ──
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [role, setRole] = useState(null)
+  const [user, setUser]         = useState(null)
+  const [role, setRole]         = useState(null)
   const [userData, setUserData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading]   = useState(true)
 
-  // Listen to auth state changes
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
-        // Fetch user doc from Firestore
-        const ref = doc(db, "users", firebaseUser.uid)
+        const ref  = doc(db, "users", firebaseUser.uid)
         const snap = await getDoc(ref)
 
         if (snap.exists()) {
@@ -40,7 +35,7 @@ export function AuthProvider({ children }) {
           setRole(data.role)
           setUserData(data)
         } else {
-          // Doc missing — treat as pending
+          // Doc missing — treat as pending (only happens for manually created accounts)
           setUser(firebaseUser)
           setRole("pending")
           setUserData(null)
@@ -56,40 +51,39 @@ export function AuthProvider({ children }) {
     return unsub
   }, [])
 
-  // ── Email + Password Signup ──
+  // ── Community Signup (instant access, no pending) ──
   const signUpEmail = async (email, password, displayName) => {
     const cred = await createUserWithEmailAndPassword(auth, email, password)
 
-    // Create user document in Firestore
     await setDoc(doc(db, "users", cred.user.uid), {
-      uid: cred.user.uid,
-      email: email,
+      uid:         cred.user.uid,
+      email:       email,
       displayName: displayName,
-      role: "pending",
-      createdAt: serverTimestamp(),
-      approvedAt: null,
-      approvedBy: null,
+      role:        "community",       // instant — no pending
+      createdAt:   serverTimestamp(),
+      approvedAt:  serverTimestamp(), // self-approved
+      approvedBy:  "self",
     })
 
     return cred
   }
 
-  // ── Google Signup / Login ──
+  // ── Google Sign In / Sign Up ──
   const signInGoogle = async () => {
     const cred = await signInWithPopup(auth, provider)
-    const ref = doc(db, "users", cred.user.uid)
+    const ref  = doc(db, "users", cred.user.uid)
     const snap = await getDoc(ref)
 
-    // Only create doc if first time
+    // Only create doc if this is their first time
     if (!snap.exists()) {
       await setDoc(ref, {
-        uid: cred.user.uid,
-        email: cred.user.email,
+        uid:         cred.user.uid,
+        email:       cred.user.email,
         displayName: cred.user.displayName,
-        role: "pending",
-        createdAt: serverTimestamp(),
-        approvedAt: null,
-        approvedBy: null,
+        role:        "community",     // instant — no pending
+        createdAt:   serverTimestamp(),
+        approvedAt:  serverTimestamp(),
+        approvedBy:  "self",
       })
     }
 
@@ -114,12 +108,11 @@ export function AuthProvider({ children }) {
     logout,
   }
 
-  // Don't render children until auth state is known
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="text-center">
         <div className="font-heading font-black text-primary text-xs tracking-[0.3em] uppercase animate-pulse">
-          FashilHack 🛡️ Initializing
+          FashilHack — Initializing
         </div>
       </div>
     </div>
