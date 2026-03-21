@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { collection, getDocs, query, where, orderBy } from "firebase/firestore"
+import { collection, getDocs } from "firebase/firestore"
 import { db } from "../../config/firebase"
 import PortalLayout from "../../components/layout/PortalLayout"
 import Card from "../../components/ui/Card"
@@ -7,12 +7,18 @@ import Badge from "../../components/ui/Badge"
 import SectionTag from "../../components/ui/SectionTag"
 import { useNavigate } from "react-router-dom"
 
+const IconCheck = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+)
+
 export default function TeamDashboard() {
   const navigate = useNavigate()
   const [engagements, setEngagements] = useState([])
-  const [findings, setFindings] = useState([])
-  const [users, setUsers] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [findings,    setFindings]    = useState([])
+  const [users,       setUsers]       = useState([])
+  const [loading,     setLoading]     = useState(true)
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -34,22 +40,22 @@ export default function TeamDashboard() {
     fetchAll()
   }, [])
 
-  const pending = users.filter(u => u.role === "pending")
-  const clients = users.filter(u => u.role === "client")
+  const pending  = users.filter(u => u.role === "pending")
+  const clients  = users.filter(u => u.role === "client")
   const critical = findings.filter(f => f.severity === "critical" && f.status === "open")
-  const active = engagements.filter(e => e.status === "active")
+  const active   = engagements.filter(e => e.status === "active")
 
   const stats = [
-    { label: "Active Engagements", value: active.length, color: "text-blue-primary", click: "/team/engagements" },
-    { label: "Total Clients", value: clients.length, color: "text-green-primary", click: "/team/users" },
-    { label: "Critical Open", value: critical.length, color: "text-red-500", click: "/team/findings" },
-    { label: "Pending Approvals", value: pending.length, color: "text-yellow-400", click: "/team/users" },
+    { label: "Active Engagements", value: active.length,   color: "text-blue-primary",  click: "/team/engagements" },
+    { label: "Total Clients",      value: clients.length,  color: "text-green-primary", click: "/team/users" },
+    { label: "Critical Open",      value: critical.length, color: "text-red-500",        click: "/team/findings" },
+    { label: "Pending Approvals",  value: pending.length,  color: "text-yellow-400",    click: "/team/users" },
   ]
 
   if (loading) return (
     <PortalLayout title="Team Dashboard">
       <div className="flex items-center justify-center h-64">
-        <p className="font-sans text-sm text-slate-400 animate-pulse font-bold tracking-widest">SYNCING...</p>
+        <p className=" text-sm text-slate-400 animate-pulse font-bold tracking-widest">SYNCING...</p>
       </div>
     </PortalLayout>
   )
@@ -64,7 +70,7 @@ export default function TeamDashboard() {
             <div className={`font-heading font-black text-4xl ${s.color} mb-2`}>
               {s.value}
             </div>
-            <div className="font-sans text-[10px] text-slate-400 font-black tracking-widest uppercase">
+            <div className=" text-[10px] text-slate-400 font-black tracking-widest uppercase">
               {s.label}
             </div>
           </Card>
@@ -79,17 +85,17 @@ export default function TeamDashboard() {
           <div className="flex flex-col gap-4 mt-4">
             {engagements.length === 0 ? (
               <Card>
-                <p className="font-sans text-sm text-slate-500">No engagements yet.</p>
+                <p className=" text-sm text-slate-500">No engagements yet.</p>
               </Card>
             ) : engagements.slice(0, 5).map(e => (
               <Card
                 key={e.id}
                 onClick={() => navigate("/team/engagements")}
-                className="flex items-center justify-between"
+                className="flex items-center justify-between cursor-pointer"
               >
                 <div>
-                  <p className="font-sans font-black text-md text-primary tracking-tight mb-1">{e.title}</p>
-                  <p className="font-sans text-xs text-slate-500 font-bold">
+                  <p className="font-black text-md text-primary tracking-tight mb-1">{e.title}</p>
+                  <p className="text-xs text-slate-500 font-bold">
                     {e.clientName || "—"} &nbsp;·&nbsp; {e.phase || "—"}
                   </p>
                 </div>
@@ -105,19 +111,20 @@ export default function TeamDashboard() {
           <div className="flex flex-col gap-4 mt-4">
             {critical.length === 0 ? (
               <Card>
-                <p className="font-sans text-sm text-slate-500">
-                  ✓ No open critical findings.
-                </p>
+                <div className="flex items-center gap-2 text-green-primary">
+                  <IconCheck />
+                  <p className="text-sm text-slate-500">No open critical findings.</p>
+                </div>
               </Card>
             ) : critical.slice(0, 5).map(f => (
               <Card
                 key={f.id}
                 onClick={() => navigate("/team/findings")}
-                className="flex items-center justify-between"
+                className="flex items-center justify-between cursor-pointer"
               >
                 <div>
-                  <p className="font-sans font-black text-md text-primary tracking-tight mb-1">{f.title}</p>
-                  <p className="font-sans text-xs text-slate-500 font-bold">{f.clientName || "—"}</p>
+                  <p className="font-black text-md text-primary tracking-tight mb-1">{f.title}</p>
+                  <p className="text-xs text-slate-500 font-bold">{f.clientName || "—"}</p>
                 </div>
                 <Badge label="critical" type="critical" />
               </Card>
@@ -131,21 +138,22 @@ export default function TeamDashboard() {
           <div className="flex flex-col gap-4 mt-4">
             {pending.length === 0 ? (
               <Card>
-                <p className="font-sans text-sm text-slate-500">
-                  ✓ No pending approvals.
-                </p>
+                <div className="flex items-center gap-2">
+                  <span className="text-green-primary"><IconCheck /></span>
+                  <p className=" text-sm text-slate-500">No pending approvals.</p>
+                </div>
               </Card>
             ) : pending.slice(0, 4).map(u => (
               <Card
                 key={u.id}
                 onClick={() => navigate("/team/users")}
-                className="flex items-center justify-between"
+                className="flex items-center justify-between cursor-pointer"
               >
                 <div>
-                  <p className="font-sans font-black text-md text-primary tracking-tight mb-1">
+                  <p className="font-black text-md text-primary tracking-tight mb-1">
                     {u.displayName}
                   </p>
-                  <p className="font-sans text-xs text-slate-500 font-bold">{u.email}</p>
+                  <p className="text-xs text-slate-500 font-bold">{u.email}</p>
                 </div>
                 <Badge label="pending" type="pending" />
               </Card>
@@ -153,7 +161,7 @@ export default function TeamDashboard() {
             {pending.length > 4 && (
               <button
                 onClick={() => navigate("/team/users")}
-                className="font-sans text-sm font-black text-accent hover:underline text-left mt-2"
+                className=" text-sm font-black text-accent hover:underline text-left mt-2"
               >
                 +{pending.length - 4} more pending →
               </button>
@@ -172,18 +180,18 @@ export default function TeamDashboard() {
                 : 0
               const colors = {
                 critical: "bg-red-500",
-                high: "bg-orange-500",
-                medium: "bg-yellow-400",
-                low: "bg-primary",
-                info: "bg-slate-300",
+                high:     "bg-orange-500",
+                medium:   "bg-yellow-400",
+                low:      "bg-primary",
+                info:     "bg-slate-300",
               }
               return (
                 <div key={sev} className="mb-6 last:mb-0">
                   <div className="flex justify-between mb-2">
-                    <span className="font-sans text-[10px] font-black tracking-widest uppercase text-slate-400">
+                    <span className="text-[10px] font-black tracking-widest uppercase text-slate-400">
                       {sev}
                     </span>
-                    <span className="font-sans text-xs font-black text-primary">
+                    <span className=" text-xs font-black text-primary">
                       {count}
                     </span>
                   </div>

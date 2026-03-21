@@ -36,7 +36,7 @@ export default function Findings() {
   if (loading) return (
     <PortalLayout title="Findings">
       <div className="flex items-center justify-center h-64">
-        <p className="font-mono text-xs text-dim animate-pulse tracking-widest">LOADING...</p>
+        <p className=" text-xs text-dim animate-pulse tracking-widest">LOADING...</p>
       </div>
     </PortalLayout>
   )
@@ -51,7 +51,7 @@ export default function Findings() {
             key={s}
             onClick={() => setFilter(s)}
             className={`
-              font-mono text-xs tracking-widest uppercase
+               text-xs tracking-widest uppercase
               px-4 py-2 border transition-all
               ${filter === s
                 ? "bg-green-primary text-dark-900 border-green-primary"
@@ -72,7 +72,7 @@ export default function Findings() {
           <div className="flex flex-col gap-3 mt-3 max-h-[70vh] overflow-y-auto pr-1">
             {filtered.length === 0 ? (
               <Card>
-                <p className="font-mono text-xs text-dim">No findings found.</p>
+                <p className=" text-xs text-dim">No findings found.</p>
               </Card>
             ) : filtered.map(f => (
               <Card
@@ -91,7 +91,7 @@ export default function Findings() {
                   </p>
                   <Badge label={f.severity} type={f.severity} />
                 </div>
-                <p className="font-mono text-xs text-dim mt-2">
+                <p className=" text-xs text-dim mt-2">
                   {f.engagementTitle || "—"}
                 </p>
               </Card>
@@ -107,7 +107,7 @@ export default function Findings() {
               <div className="flex items-start justify-between gap-4 mb-6">
                 <div>
                   <SectionTag text="Finding Detail" />
-                  <h2 className="font-orbitron font-bold text-lg mt-1">
+                  <h2 className=" font-bold text-lg mt-1">
                     {selected.title}
                   </h2>
                 </div>
@@ -122,8 +122,8 @@ export default function Findings() {
                   { label: "Found",  value: selected.createdAt?.toDate?.()?.toLocaleDateString() || "—" },
                 ].map(({ label, value }) => (
                   <div key={label} className="border border-green-primary/10 p-3">
-                    <p className="font-mono text-xs text-dim tracking-widest uppercase mb-1">{label}</p>
-                    <div className="font-mono text-xs text-white">{value}</div>
+                    <p className=" text-xs text-dim tracking-widest uppercase mb-1">{label}</p>
+                    <div className=" text-xs text-white">{value}</div>
                   </div>
                 ))}
               </div>
@@ -136,10 +136,10 @@ export default function Findings() {
                 { label: "References",        value: selected.references    },
               ].map(({ label, value }) => value && (
                 <div key={label} className="mb-5 border-t border-green-primary/10 pt-5">
-                  <p className="font-mono text-xs text-green-primary tracking-widest uppercase mb-2">
+                  <p className=" text-xs text-green-primary tracking-widest uppercase mb-2">
                     {label}
                   </p>
-                  <p className="font-mono text-xs text-dim leading-relaxed">
+                  <p className=" text-xs text-dim leading-relaxed">
                     {value}
                   </p>
                 </div>
@@ -147,7 +147,7 @@ export default function Findings() {
             </Card>
           ) : (
             <Card>
-              <p className="font-mono text-xs text-dim">
+              <p className=" text-xs text-dim">
                 Select a finding to view full details.
               </p>
             </Card>

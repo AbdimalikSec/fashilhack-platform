@@ -25,7 +25,7 @@ export default function Button({
 
   const variants = {
     primary: `
-      bg-primary text-white border-2 border-primary
+      bg-primary text-black border-2 border-primary
       hover:bg-primary-light hover:border-primary-light
       shadow-sm active:transform active:scale-95
     `,

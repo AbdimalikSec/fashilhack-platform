@@ -4,6 +4,8 @@ import dotenv     from "dotenv"
 import contactRouter  from "./routes/contact.js"
 import reportsRouter  from "./routes/reports.js"
 import notifyRouter   from "./routes/notify.js"
+import adminUsersRouter from "./routes/adminUsers.js"
+import stripeRouter from "./routes/stripe.js"
 
 dotenv.config()
 
@@ -19,6 +21,10 @@ app.use(cors({
   ],
   credentials: true,
 }))
+app.use("/api/stripe/webhook",
+  express.raw({ type: "application/json" }),
+  stripeRouter
+)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -26,6 +32,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use("/api/contact", contactRouter)
 app.use("/api/reports", reportsRouter)
 app.use("/api/notify",  notifyRouter)
+app.use("/api/admin", adminUsersRouter)
+app.use("/api/stripe", stripeRouter)
 
 // ── Health check ──
 app.get("/", (req, res) => {

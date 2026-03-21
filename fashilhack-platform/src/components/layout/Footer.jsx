@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-
+import logo2 from "../../assets/logo2.png"
 function ShieldLogo() {
   return (
     <svg width="24" height="28" viewBox="0 0 38 44" fill="none">
@@ -44,7 +44,7 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <Link to="/" className="flex items-center gap-2 mb-6">
-            <ShieldLogo />
+             <img src={logo2} alt="" height={20} width={20} />
             <span className="
               font-heading font-black text-base text-primary
             ">

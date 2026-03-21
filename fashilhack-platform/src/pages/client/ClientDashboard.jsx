@@ -62,7 +62,7 @@ export default function ClientDashboard() {
   if (loading) return (
     <PortalLayout title="Dashboard">
       <div className="flex items-center justify-center h-64">
-        <p className="font-sans text-sm text-slate-400 animate-pulse font-bold tracking-widest">
+        <p className=" text-sm text-slate-400 animate-pulse font-bold tracking-widest">
           SYNCING...
         </p>
       </div>
@@ -79,7 +79,7 @@ export default function ClientDashboard() {
             <div className={`font-heading font-black text-4xl ${s.color} mb-2`}>
               {s.value}
             </div>
-            <div className="font-sans text-[10px] text-slate-400 font-black tracking-widest uppercase">
+            <div className="text-[10px] text-slate-400 font-black tracking-widest uppercase">
               {s.label}
             </div>
           </Card>
@@ -93,7 +93,7 @@ export default function ClientDashboard() {
           <div className="flex flex-col gap-4 mt-4">
             {engagements.length === 0 ? (
               <Card>
-                <p className="font-sans text-sm text-slate-500">
+                <p className=" text-sm text-slate-500">
                   No engagements yet. Contact FashilHack to get started.
                 </p>
               </Card>
@@ -104,10 +104,10 @@ export default function ClientDashboard() {
                 className="flex items-center justify-between"
               >
                 <div>
-                  <p className="font-sans font-black text-lg text-primary tracking-tight mb-1">
+                  <p className=" font-black text-lg text-primary tracking-tight mb-1">
                     {e.title}
                   </p>
-                  <p className="font-sans text-xs text-slate-500 font-bold">
+                  <p className=" text-xs text-slate-500 font-bold">
                     {e.phase} &nbsp;·&nbsp;
                     Started {e.startDate || "—"}
                   </p>
@@ -124,7 +124,7 @@ export default function ClientDashboard() {
           <div className="flex flex-col gap-4 mt-4">
             {findings.length === 0 ? (
               <Card>
-                <p className="font-sans text-sm text-slate-500">
+                <p className="text-sm text-slate-500">
                   No findings recorded yet.
                 </p>
               </Card>
@@ -135,10 +135,10 @@ export default function ClientDashboard() {
                 className="flex items-center justify-between"
               >
                 <div>
-                  <p className="font-sans font-black text-lg text-primary tracking-tight mb-1">
+                  <p className=" font-black text-lg text-primary tracking-tight mb-1">
                     {f.title}
                   </p>
-                  <p className="font-sans text-xs text-slate-500 font-bold">
+                  <p className="text-xs text-slate-500 font-bold">
                     {f.engagementTitle || "—"}
                   </p>
                 </div>
@@ -148,7 +148,7 @@ export default function ClientDashboard() {
             {findings.length > 5 && (
               <button
                 onClick={() => navigate("/client/findings")}
-                className="font-sans text-sm font-black text-accent hover:underline text-left mt-2"
+                className=" text-sm font-black text-accent hover:underline text-left mt-2"
               >
                 View all {findings.length} findings →
               </button>

@@ -1,110 +1,206 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #0f172a;
-  /* Slate 900 - Deep Professional Blue */
-  --color-primary-light: #1e293b;
-  /* Slate 800 */
-  --color-accent: #2563eb;
-  /* Blue 600 - Sharp Action Color */
-  --color-accent-light: #eff6ff;
-  /* Blue 50 */
-  --color-text-main: #1e293b;
-  /* Slate 800 */
-  --color-text-muted: #64748b;
-  /* Slate 500 */
-  --color-border: #e2e8f0;
-  /* Slate 200 */
-  --color-bg-white: #ffffff;
-  --color-bg-subtle: #f8fafc;
-  /* Slate 50 */
+/* ── LIGHT MODE VARIABLES ── */
+:root {
+  --color-bg:          #f8fafc;
+  --color-surface:     #ffffff;
+  --color-surface-alt: #f1f5f9;
+  --color-border:      #e2e8f0;
+  --color-border-soft: #f1f5f9;
 
-  --font-inter: "Inter", sans-serif;
+  --color-txt:         #0f172a;
+  --color-txt-subtle:  #475569;
+  --color-txt-muted:   #94a3b8;
+
+  --color-accent:      #00aaff;
+  --color-accent-dim:  rgba(0,170,255,0.08);
+
+  --font-sans:    "Inter", sans-serif;
   --font-heading: "Outfit", sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-* {
-  box-sizing: border-box;
+/* ── DARK MODE VARIABLES ── */
+html.dark {
+  --color-bg:          #0d0f16;
+  --color-surface:     #1a1d27;
+  --color-surface-alt: #13161f;
+  --color-border:      rgba(255,255,255,0.08);
+  --color-border-soft: rgba(255,255,255,0.05);
+
+  --color-txt:         #f1f5f9;
+  --color-txt-subtle:  rgba(255,255,255,0.65);
+  --color-txt-muted:   rgba(255,255,255,0.35);
+
+  --color-accent:      #00aaff;
+  --color-accent-dim:  rgba(0,170,255,0.12);
 }
 
-body {
-  background-color: white;
-  color: #1e293b;
-  font-family: var(--font-inter);
+/* ── PUBLIC DARK MODE ──
+   Separate from portal dark. Applied via html.public-dark class.
+   Scoped to .public-page wrapper so Tailwind hardcoded classes
+   inside public pages get overridden cleanly. */
+html.public-dark .public-page {
+  background-color: #0d0f16;
+  color: #f1f5f9;
+}
+html.public-dark .public-page a:not([class*="text-"]) {
+  color: #f1f5f9;
+}
+/* Navbar in public dark */
+html.public-dark .public-nav {
+  background-color: rgba(13,15,22,0.95) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+html.public-dark .public-nav .nav-link {
+  color: rgba(255,255,255,0.65) !important;
+}
+html.public-dark .public-nav .nav-link:hover {
+  color: #00aaff !important;
+}
+html.public-dark .public-nav .nav-brand {
+  color: #ffffff !important;
+}
+/* Cards and surfaces in public dark */
+html.public-dark .public-page .public-card {
+  background-color: #1a1d27 !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #f1f5f9 !important;
+}
+/* Text overrides for public dark */
+html.public-dark .public-page h1,
+html.public-dark .public-page h2,
+html.public-dark .public-page h3,
+html.public-dark .public-page h4,
+html.public-dark .public-page h5,
+html.public-dark .public-page h6 {
+  color: #f1f5f9 !important;
+}
+html.public-dark .public-page p,
+html.public-dark .public-page span,
+html.public-dark .public-page li {
+  color: rgba(255,255,255,0.75) !important;
+}
+/* Inputs in public dark */
+html.public-dark .public-page input,
+html.public-dark .public-page textarea,
+html.public-dark .public-page select {
+  background-color: #1a1d27 !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+/* Sections with slate/white backgrounds */
+html.public-dark .public-page .bg-white,
+html.public-dark .public-page .bg-slate-50 {
+  background-color: #1a1d27 !important;
+}
+html.public-dark .public-page .bg-slate-100 {
+  background-color: #13161f !important;
+}
+html.public-dark .public-page .border-slate-200,
+html.public-dark .public-page .border-slate-100 {
+  border-color: rgba(255,255,255,0.08) !important;
+}
+html.public-dark .public-page .text-slate-600,
+html.public-dark .public-page .text-slate-500,
+html.public-dark .public-page .text-slate-700 {
+  color: rgba(255,255,255,0.65) !important;
+}
+html.public-dark .public-page .text-slate-400,
+html.public-dark .public-page .text-slate-300 {
+  color: rgba(255,255,255,0.4) !important;
+}
+html.public-dark .public-page .text-primary {
+  color: #f1f5f9 !important;
+}
+
+/* ── BASE ── */
+* { box-sizing: border-box; }
+
+html, body {
+  background-color: var(--color-bg);
+  color: var(--color-txt);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   letter-spacing: -0.011em;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-h1,
-h2,
-h3,
-h4,
-.font-heading {
-  font-family: var(--font-heading);
-  letter-spacing: -0.02em;
-  color: #0f172a;
-  font-weight: 700;
+/* ── FONT UTILITIES ── */
+.font-sans    { font-family: var(--font-sans); }
+.font-heading { font-family: var(--font-heading); }
+.font-mono    { font-family: var(--font-mono); }
+.font-rajdhani { font-family: var(--font-heading); }
+.font-orbitron { font-family: var(--font-heading); }
+
+/* ── SEMANTIC COLOR UTILITIES ──
+   Use these everywhere instead of hardcoded slate-* or white/black.
+   They automatically swap between light and dark. */
+
+.bg-page        { background-color: var(--color-bg); }
+.bg-surface     { background-color: var(--color-surface); }
+.bg-surface-alt { background-color: var(--color-surface-alt); }
+.bg-accent-dim  { background-color: var(--color-accent-dim); }
+
+.text-main   { color: var(--color-txt); }
+.text-subtle { color: var(--color-txt-subtle); }
+.text-muted  { color: var(--color-txt-muted); }
+.text-accent { color: var(--color-accent); }
+
+.border-theme      { border-color: var(--color-border); }
+.border-theme-soft { border-color: var(--color-border-soft); }
+
+/* ── COMPONENT DEFAULTS ── */
+
+/* Cards */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-/* Base Spacing Utilities */
-.section-padding {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+/* Inputs */
+.input {
+  width: 100%;
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  color: var(--color-txt);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input::placeholder { color: var(--color-txt-muted); }
+.input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-dim);
 }
 
-.page-header-offset {
-  margin-top: 2rem;
+/* Select inherits input styles */
+select.input { cursor: pointer; }
+textarea.input { resize: vertical; }
+
+/* Label */
+.label {
+  display: block;
+  font-size: 0.625rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-txt-muted);
+  margin-bottom: 0.5rem;
 }
 
-@media (min-width: 768px) {
-  .section-padding {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-}
+/* Section divider */
+.divider { border-color: var(--color-border); }
 
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f8fafc;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-.professional-shadow {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-}
-
-.professional-card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  /* Slightly more rounded for premium feel */
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.professional-card:hover {
-  border-color: #2563eb;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-}
-
-/* Form Styles */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-select,
-textarea {
-  font-family: var(--font-inter);
-}
+/* Scrollbar — subtle in dark mode */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
