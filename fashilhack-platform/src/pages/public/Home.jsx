@@ -70,14 +70,7 @@ export default function Home() {
               Our Services
             </button>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 24, marginTop: 64, flexWrap: "wrap", justifyContent: "center" }}>
-            {["ISO 27001 Methodology", "PNPT Certified Team", "Full NDA Coverage"].map(txt => (
-              <div key={txt} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ width: 16, height: 16, borderRadius: "50%", backgroundColor: "#00aaff", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", flexShrink: 0 }}><IconCheck /></span>
-                <span style={{ fontFamily: "sans-serif", fontSize: 12, fontWeight: 600, color: t.body }}>{txt}</span>
-              </div>
-            ))}
-          </div>
+        
         </div>
       </section>
 

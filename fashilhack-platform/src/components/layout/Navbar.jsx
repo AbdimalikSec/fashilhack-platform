@@ -12,7 +12,6 @@ const PUBLIC_LINKS = [
   { label: "Services",  to: "/services" },
   { label: "About",     to: "/about" },
   { label: "Community", to: "/community" },
-  /* { label: "Courses", to: "/courses" }, */
   { label: "Contact",   to: "/contact" },
 ]
 
