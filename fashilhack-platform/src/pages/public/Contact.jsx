@@ -56,7 +56,7 @@ export default function Contact() {
 
       {/* FORM + INFO */}
       <section style={{ backgroundColor: t.sectionAlt, padding: "112px 24px", transition: "background-color 0.2s" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 2fr", gap: 64, alignItems: "flex-start" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start" style={{ maxWidth: 1280, margin: "0 auto" }}>
 
           {/* Left */}
           <div>
@@ -86,7 +86,7 @@ export default function Contact() {
           </div>
 
           {/* Right — Form */}
-          <div>
+          <div className="lg:col-span-2">
             {sent ? (
               <div style={{ backgroundColor: t.cardBg, border: `1px solid ${t.cardBorder}`, borderRadius: 24, padding: 64, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 500 }}>
                 <div style={{ width: 64, height: 64, borderRadius: "50%", backgroundColor: "#00aaff", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 32 }}><IconCheck /></div>
@@ -100,7 +100,7 @@ export default function Contact() {
             ) : (
               <div style={{ backgroundColor: t.cardBg, border: `1px solid ${t.cardBorder}`, borderRadius: 24, padding: 40 }}>
                 {error && <div style={{ fontFamily: "sans-serif", fontSize: 12, fontWeight: 700, color: "#ef4444", border: "1px solid rgba(239,68,68,0.2)", backgroundColor: "rgba(239,68,68,0.08)", padding: "14px 20px", borderRadius: 12, marginBottom: 24 }}>{error}</div>}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <p style={{ fontFamily: "sans-serif", fontSize: 10, fontWeight: 800, color: t.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>Full Name *</p>
                     <input name="name" placeholder="Your name" value={form.name} onChange={handleChange} style={inp} onFocus={e => e.target.style.borderColor = "#00aaff"} onBlur={e => e.target.style.borderColor = t.inputBorder} />
@@ -110,7 +110,7 @@ export default function Contact() {
                     <input name="email" type="email" placeholder="you@company.com" value={form.email} onChange={handleChange} style={inp} onFocus={e => e.target.style.borderColor = "#00aaff"} onBlur={e => e.target.style.borderColor = t.inputBorder} />
                   </div>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <p style={{ fontFamily: "sans-serif", fontSize: 10, fontWeight: 800, color: t.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>Organization</p>
                     <input name="company" placeholder="Company name" value={form.company} onChange={handleChange} style={inp} onFocus={e => e.target.style.borderColor = "#00aaff"} onBlur={e => e.target.style.borderColor = t.inputBorder} />

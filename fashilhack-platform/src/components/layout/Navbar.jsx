@@ -69,7 +69,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="public-nav fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 border-b border-slate-200"
+    <nav className="public-nav fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-4 border-b border-slate-200"
       style={{ backgroundColor: dark ? "rgba(13,15,22,0.95)" : "rgba(255,255,255,0.9)", backdropFilter: "blur(12px)", borderColor: dark ? "rgba(255,255,255,0.08)" : undefined, transition: "background-color 0.2s, border-color 0.2s" }}
     >
       {/* Logo */}

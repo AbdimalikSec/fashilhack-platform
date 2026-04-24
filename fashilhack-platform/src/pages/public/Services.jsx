@@ -55,7 +55,7 @@ export default function Services() {
       {/* SERVICES GRID */}
       <section style={{ backgroundColor: t.sectionAlt, padding: "112px 24px", transition: "background-color 0.2s" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(400px,1fr))", gap: 32 }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {SERVICES.map(s => (
               <div key={s.title} style={{ backgroundColor: t.cardBg, border: `1px solid ${t.cardBorder}`, borderRadius: 24, padding: 40, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = "#00aaff"; e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,170,255,0.1)" }}
@@ -65,7 +65,7 @@ export default function Services() {
                   <div style={{ flex: 1 }}>
                     <h3 style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: 20, color: t.heading, marginBottom: 12, letterSpacing: "-0.03em" }}>{s.title}</h3>
                     <p style={{ fontFamily: "sans-serif", fontSize: 14, color: t.body, lineHeight: 1.7, marginBottom: 24 }}>{s.desc}</p>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {s.items.map(item => (
                         <div key={item} style={{ display: "flex", alignItems: "center", gap: 8 }}>
                           <span style={{ width: 16, height: 16, borderRadius: "50%", backgroundColor: "rgba(0,170,255,0.15)", color: "#00aaff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><IconCheck /></span>

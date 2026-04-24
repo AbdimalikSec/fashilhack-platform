@@ -55,7 +55,7 @@ export default function About() {
 
       {/* MISSION */}
       <section style={{ backgroundColor: t.sectionAlt, padding: "112px 24px", transition: "background-color 0.2s" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center" style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div>
             <Tag text="Our Mission" />
             <h2 style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: "clamp(1.8rem,3vw,2.5rem)", color: t.heading, letterSpacing: "-0.03em", lineHeight: 1.15, marginBottom: 32 }}>Bridging Security<br />and Business Reality</h2>
@@ -88,7 +88,7 @@ export default function About() {
             <Tag text="Our Values" />
             <h2 style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: "clamp(2rem,4vw,3rem)", color: t.heading, letterSpacing: "-0.03em" }}>Operational Principles</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 24 }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map(v => (
               <div key={v.title} style={{ backgroundColor: t.sectionAlt, border: `1px solid ${t.cardBorder}`, borderRadius: 16, padding: 32, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = "#00aaff"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,170,255,0.1)" }}
@@ -110,7 +110,7 @@ export default function About() {
             <h2 style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: "clamp(2rem,4vw,3rem)", color: t.heading, letterSpacing: "-0.03em" }}>The Experts Behind FashilHack</h2>
             <p style={{ fontFamily: "sans-serif", fontSize: 18, color: t.body, maxWidth: 480, margin: "24px auto 0", lineHeight: 1.7 }}>A specialized team of offensive security professionals with real-world attack experience.</p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 32 }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {TEAM.map(member => (
               <div key={member.name} style={{ backgroundColor: t.cardBg, border: `1px solid ${t.cardBorder}`, borderRadius: 24, overflow: "hidden", transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = "#00aaff"; e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,170,255,0.1)" }}

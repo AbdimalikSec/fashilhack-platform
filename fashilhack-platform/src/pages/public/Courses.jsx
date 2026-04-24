@@ -104,7 +104,7 @@ export default function Courses() {
 
           {/* Grid */}
           {loading ? (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 24 }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[1,2,3].map(i => (
                 <div key={i} style={{ backgroundColor: t.cardBg, borderRadius: 20, overflow: "hidden", border: `1px solid ${t.cardBorder}` }}>
                   <div style={{ height: 180, backgroundColor: t.sectionAlt }} />
@@ -122,7 +122,7 @@ export default function Courses() {
               {search && <button onClick={() => setSearch("")} style={{ marginTop: 12, fontFamily: "sans-serif", fontSize: 13, fontWeight: 700, color: "#00aaff", background: "none", border: "none", cursor: "pointer" }}>Clear search</button>}
             </div>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 24 }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map(course => {
                 const lc = levelColor(course.level)
                 return (

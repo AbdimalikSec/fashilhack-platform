@@ -76,7 +76,7 @@ export default function Home() {
 
       {/* STATS */}
       <section style={{ borderTop: `1px solid ${t.border}`, borderBottom: `1px solid ${t.border}`, backgroundColor: t.pageBg, transition: "background-color 0.2s" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
+        <div className="grid grid-cols-2 lg:grid-cols-4" style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px" }}>
           {STATS.map((s, i) => (
             <div key={s.label} style={{ padding: "56px 0", textAlign: "center", borderRight: i < 3 ? `1px solid ${t.border}` : "none" }}>
               <div style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: 48, marginBottom: 8, color: t.heading }}>{s.num}</div>
@@ -96,7 +96,7 @@ export default function Home() {
             <h2 style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: "clamp(2rem,4vw,3rem)", color: t.heading, letterSpacing: "-0.03em" }}>Our Security Services</h2>
             <p style={{ fontFamily: "sans-serif", fontSize: 18, color: t.body, maxWidth: 640, margin: "24px auto 0", lineHeight: 1.7 }}>From reconnaissance to remediation, every attack surface covered.</p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {SERVICES.map(s => (
               <div key={s.title} style={{ backgroundColor: t.cardBg, border: `1px solid ${t.cardBorder}`, borderRadius: 16, padding: 32, transition: "all 0.2s", cursor: "default" }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = "#00aaff"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,170,255,0.1)" }}
@@ -116,7 +116,7 @@ export default function Home() {
 
       {/* WHY FASHILHACK */}
       <section style={{ padding: "112px 24px", backgroundColor: t.pageBg, transition: "background-color 0.2s" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center" style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 16px", borderRadius: 999, border: `1px solid ${t.tagBorder}`, backgroundColor: t.tagBg, marginBottom: 24 }}>
               <span style={{ fontFamily: "sans-serif", fontSize: 11, fontWeight: 700, color: t.tagText, letterSpacing: "0.1em", textTransform: "uppercase" }}>Why FashilHack</span>
@@ -168,8 +168,8 @@ export default function Home() {
           </div>
           <h2 style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: "clamp(2rem,4vw,3rem)", color: t.heading, letterSpacing: "-0.03em", marginBottom: 24 }}>From Scoping to Secured</h2>
           <p style={{ fontFamily: "sans-serif", fontSize: 18, color: t.body, maxWidth: 640, margin: "0 auto 80px", lineHeight: 1.7 }}>A structured engagement model that keeps you informed at every stage.</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 32, position: "relative" }}>
-            <div style={{ position: "absolute", top: 28, left: "10%", right: "10%", height: 1, backgroundColor: t.timelineLine }} />
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8" style={{ position: "relative" }}>
+            <div className="hidden lg:block" style={{ position: "absolute", top: 28, left: "10%", right: "10%", height: 1, backgroundColor: t.timelineLine }} />
             {STEPS.map(step => (
               <div key={step.num} style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "relative" }}>
                 <div style={{ width: 56, height: 56, borderRadius: "50%", border: `2px solid #00aaff`, backgroundColor: t.cardBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, zIndex: 1 }}>

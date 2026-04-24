@@ -39,7 +39,7 @@ export default function Footer() {
       bg-white
       border-t border-slate-100
     ">
-      <div className="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
 
         {/* Brand */}
         <div>
@@ -81,7 +81,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="
         border-t border-slate-50
-        px-8 py-6
+        px-4 md:px-8 py-6
         flex flex-col md:flex-row
         items-center justify-between gap-4
       ">
